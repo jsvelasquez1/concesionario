@@ -26,7 +26,6 @@ public class ClienteModel {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "cliente_id")
-    @JsonIgnore
     private Set<VentasModel> ventasModels = new HashSet<>();
 
     public ClienteModel(Long id_cliente, String nombre, String apellido, String cedula, String direccion, String telefono, Set<VentasModel> ventasModels) {

@@ -2,6 +2,7 @@ package com.espe.concesionario.controllers;
 
 import com.espe.concesionario.models.VentasModel;
 import com.espe.concesionario.repositories.VentasRepo;
+import com.espe.concesionario.services.VentasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,25 +15,38 @@ import java.util.Optional;
 
 public class VentasController {
     @Autowired
-    VentasRepo ventaRepo;
+    VentasService ventasService;
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<VentasModel> listarVentas(){
-        return ventaRepo.findAll();
+        return ventasService.listarVentas();
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public VentasModel creaVenta(@RequestBody VentasModel ventaModel){
-        return ventaRepo.save(ventaModel);
+        return ventasService.creaVenta(ventaModel);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(path = "/{id}")
     public Optional<VentasModel> ventaPorId(@PathVariable(value = "id") Long ventaId) {
-        return ventaRepo.findById(ventaId);
+        return ventasService.ventaPorId(ventaId);
     }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PutMapping(path = "/{id}")
+    public VentasModel actualizaVenta(@RequestBody VentasModel ventaModel, @PathVariable(value = "id") Long ventaId){
+        return ventasService.actualizaVenta(ventaModel, ventaId);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @DeleteMapping(path = "/{id}")
+    public void eliminaVenta(@PathVariable(value = "id") Long ventaId){
+        ventasService.borraVenta(ventaId);
+    }
+
 }

@@ -22,6 +22,5 @@ public class ProveedorModel {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "proveedor_id")
-    @JsonIgnore
     private Set<VehiculoModel> vehiculoModels = new HashSet<>();
 }

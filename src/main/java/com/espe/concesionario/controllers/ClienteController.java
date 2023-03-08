@@ -1,7 +1,7 @@
 package com.espe.concesionario.controllers;
 
 import com.espe.concesionario.models.ClienteModel;
-import com.espe.concesionario.repositories.ClienteRepo;
+import com.espe.concesionario.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,48 +14,39 @@ import java.util.Optional;
 
 public class ClienteController {
     @Autowired
-    ClienteRepo clienteRepo;
+    ClienteService clienteService;
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<ClienteModel> listarClientes(){
-        return clienteRepo.findAll();
+        return clienteService.listarClientes();
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public ClienteModel crearCliente(@RequestBody ClienteModel clienteModel){
-        return clienteRepo.save(clienteModel);
+        return clienteService.crearCliente(clienteModel);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(path = "/{id}")
     public Optional<ClienteModel> clientePorId(@PathVariable(value = "id") Long clienteId) {
-        return clienteRepo.findById(clienteId);
+        return clienteService.clientePorId(clienteId);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ClienteModel actualizarCliente(@RequestBody ClienteModel clienteBody, @PathVariable Long id){
-        Optional<ClienteModel> existingClient = clienteRepo.findById(id);
-        ClienteModel clienteActualizado = existingClient.get();
-        if(existingClient!=null){
-            clienteActualizado.setNombre(clienteBody.getNombre());
-            clienteActualizado.setApellido(clienteBody.getApellido());
-            clienteActualizado.setTelefono(clienteBody.getTelefono());
-            clienteActualizado.setCedula(clienteBody.getCedula());
-            clienteActualizado.setDireccion(clienteBody.getDireccion());
-        }
-        return clienteRepo.save(clienteActualizado);
+        return clienteService.actualizarCliente(clienteBody, id);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void eliminarCliente(@PathVariable Long id){
-        clienteRepo.deleteById(id);
+        clienteService.eliminarCliente(id);
     }
 }

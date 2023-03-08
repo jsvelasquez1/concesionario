@@ -16,17 +16,16 @@ public class VentasModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_venta;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "cliente_id")
-    ClienteModel clienteModel;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "empleado_id")
-    EmpleadoModel empleadoModel;
+    @Column(name = "cliente_id")
+    Long clienteId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "vehiculo_id")
-    VehiculoModel vehiculoModel;
+
+    @Column(name = "empleado_id")
+    Long empleadoId;
+
+    @Column(name = "vehiculo_id")
+    Long vehiculoId;
 
     private LocalDate fecha_compra;
     private float precio;

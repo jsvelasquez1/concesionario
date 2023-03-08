@@ -1,7 +1,7 @@
 package com.espe.concesionario.controllers;
 
 import com.espe.concesionario.models.ProveedorModel;
-import com.espe.concesionario.repositories.ProveedorRepo;
+import com.espe.concesionario.services.ProveedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,46 +14,37 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:4200")
 public class ProveedorController {
     @Autowired
-    ProveedorRepo proveedorRepo;
+    ProveedorService proveedorService;
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<ProveedorModel> listarProveedors(){
-        return proveedorRepo.findAll();
+        return proveedorService.listarProveedors();
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public ProveedorModel crearProveedor(@RequestBody ProveedorModel proveedorModel){
-        return proveedorRepo.save(proveedorModel);
+        return proveedorService.crearProveedor(proveedorModel);
     }
 
 
     @GetMapping(path = "/{id}")
     public Optional<ProveedorModel> proveedorPorId(@PathVariable(value = "id") Long proveedorId) {
-        return proveedorRepo.findById(proveedorId);
+        return proveedorService.proveedorPorId(proveedorId);
     }
 
     @PutMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ProveedorModel actualizarProveedor(@RequestBody ProveedorModel proveedorBody, @PathVariable Long id){
-        Optional<ProveedorModel> existingClient = proveedorRepo.findById(id);
-        ProveedorModel proveedorActualizado = existingClient.get();
-        if(existingClient!=null){
-            proveedorActualizado.setNombre(proveedorBody.getNombre());
-            proveedorActualizado.setDireccion(proveedorBody.getDireccion());
-            proveedorActualizado.setNum_telefono(proveedorBody.getNum_telefono());
-            proveedorActualizado.setDireccion(proveedorBody.getDireccion());
-            proveedorActualizado.setDireccion(proveedorBody.getDireccion());
-        }
-        return proveedorRepo.save(proveedorActualizado);
+        return proveedorService.actualizarProveedor(proveedorBody, id);
     }
 
     @DeleteMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void eliminarProveedor(@PathVariable Long id){
-        proveedorRepo.deleteById(id);
+        proveedorService.eliminarProveedor(id);
     }
 }

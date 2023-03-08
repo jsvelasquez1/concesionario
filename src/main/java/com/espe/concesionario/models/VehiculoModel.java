@@ -23,10 +23,8 @@ public class VehiculoModel {
     private String modelo;
     private String color;
     private String precio;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "proveedor_id")
-    ProveedorModel proveedorModel;
+    @Column(name = "proveedor_id")
+    Long proveedorId;
 
     /*@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "vehiculo_id")
@@ -34,7 +32,6 @@ public class VehiculoModel {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "vehiculo_id")
-    @JsonIgnore
     private Set<VentasModel> ventasModels = new HashSet<>();
 
 
