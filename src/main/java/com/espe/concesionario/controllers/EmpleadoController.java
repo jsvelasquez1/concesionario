@@ -29,18 +29,18 @@ public class EmpleadoController {
         return empleadoService.crearEmpleado(empleadoModel);
     }
 
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(path = "/{id}")
     public Optional<EmpleadoModel> empleadoPorId(@PathVariable(value = "id") Long empleadoId) {
         return empleadoService.empleadoPorId(empleadoId);
     }
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public EmpleadoModel actualizarEmpleado(@RequestBody EmpleadoModel empleadoBody, @PathVariable Long id){
         return empleadoService.actualizarEmpleado(empleadoBody, id);
     }
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void eliminarEmpleado(@PathVariable Long id){

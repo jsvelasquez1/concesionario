@@ -38,6 +38,9 @@ public class ClienteModel {
         this.ventasModels = ventasModels;
     }
 
+    public ClienteModel(Long cliente_id) {
+    }
+
     public Long getId_cliente() {
         return id_cliente;
     }

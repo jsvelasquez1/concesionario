@@ -27,6 +27,9 @@ public class EmpleadoModel {
     @JoinColumn(name = "empleado_id")
     private Set<VentasModel> ventasModels = new HashSet<>();
 
+    public EmpleadoModel (Long empleado_id){
+    }
+
     /*@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "empleado_id")
     private Set<ReparacionModel> reparacionModels = new HashSet<>();*/

@@ -16,10 +16,8 @@ public class VentasModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_venta;
 
-
     @Column(name = "cliente_id")
     Long clienteId;
-
 
     @Column(name = "empleado_id")
     Long empleadoId;
@@ -29,4 +27,17 @@ public class VentasModel {
 
     private LocalDate fecha_compra;
     private float precio;
+
+    public ClienteModel getCliente() {
+        return new ClienteModel(clienteId);
+    }
+
+    public EmpleadoModel getEmpleado() {
+        return new EmpleadoModel(empleadoId);
+    }
+
+    public VehiculoModel getVehiculo() {
+        return new VehiculoModel(vehiculoId);
+    }
+
 }

@@ -34,5 +34,8 @@ public class VehiculoModel {
     @JoinColumn(name = "vehiculo_id")
     private Set<VentasModel> ventasModels = new HashSet<>();
 
+    public VehiculoModel (Long vehiculo_id){
+    }
+
 
 }

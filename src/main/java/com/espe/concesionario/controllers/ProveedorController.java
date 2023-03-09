@@ -30,18 +30,18 @@ public class ProveedorController {
         return proveedorService.crearProveedor(proveedorModel);
     }
 
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(path = "/{id}")
     public Optional<ProveedorModel> proveedorPorId(@PathVariable(value = "id") Long proveedorId) {
         return proveedorService.proveedorPorId(proveedorId);
     }
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ProveedorModel actualizarProveedor(@RequestBody ProveedorModel proveedorBody, @PathVariable Long id){
         return proveedorService.actualizarProveedor(proveedorBody, id);
     }
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void eliminarProveedor(@PathVariable Long id){
