@@ -4,6 +4,7 @@ import com.espe.concesionario.models.ClienteModel;
 import com.espe.concesionario.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class ClienteController {
     @Autowired
     ClienteService clienteService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -23,6 +25,7 @@ public class ClienteController {
         return clienteService.listarClientes();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
@@ -30,12 +33,14 @@ public class ClienteController {
         return clienteService.crearCliente(clienteModel);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(path = "/{id}")
     public Optional<ClienteModel> clientePorId(@PathVariable(value = "id") Long clienteId) {
         return clienteService.clientePorId(clienteId);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -43,6 +48,7 @@ public class ClienteController {
         return clienteService.actualizarCliente(clienteBody, id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
